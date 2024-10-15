@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "158865848157",
+    "project_id": "firebase-impl-ana",
+    "storage_bucket": "firebase-impl-ana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158865848157:android:d9cb2851153508acc59ab4",
+        "android_client_info": {
+          "package_name": "com.firebaseimplana.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbCthv_ScptZJ33H7pauLWY_czZGJRQ-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
