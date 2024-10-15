@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_impl_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -30,23 +28,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Login',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.blue,
-      ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              return Column(children: [
+    return Column(children: [
                 TextField(
                   controller: _email,
                   enableSuggestions: false,
@@ -85,11 +67,5 @@ class _LoginViewState extends State<LoginView> {
                   child: Text('Log in'),
                 ),
               ]);
-            default:
-              return const Text('Loading...');
-          }
-        },
-      ),
-    );
   }
 }
