@@ -4,7 +4,6 @@ import 'package:firebase_impl_app/firebase_options.dart';
 import 'package:firebase_impl_app/register_pages/login_view.dart';
 import 'package:firebase_impl_app/register_pages/verify_email_view.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
