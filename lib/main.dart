@@ -1,4 +1,6 @@
 import 'package:firebase_impl_app/home_page.dart';
+import 'package:firebase_impl_app/register_pages/login_view.dart';
+import 'package:firebase_impl_app/register_pages/register_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +18,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+      routes: {
+        '/login' : (context) => const LoginView(),
+        '/register' : (context) => const RegisterView(),
+      },
     );
   }
 }
