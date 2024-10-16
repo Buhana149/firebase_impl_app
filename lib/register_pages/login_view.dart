@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_impl_app/constants/routes.dart';
+import 'package:firebase_impl_app/utilities/show_error_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -54,18 +55,41 @@ class _LoginViewState extends State<LoginView> {
             final email = _email.text;
             final password = _password.text;
             try {
-              await  FirebaseAuth.instance.signInWithEmailAndPassword(
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
                 email: email,
                 password: password,
               );
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/notes', (route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                notesRoute,
+                (route) => false,
+              );
             } on FirebaseAuthException catch (e) {
               if (e.code == 'user-not-found') {
-                devtools.log('User not found');
+                await showErrordialog(
+                  context,
+                  'User not found',
+                );
               } else if (e.code == 'wrong-password') {
-                devtools.log('Wrong password');
+                await showErrordialog(
+                  context,
+                  'Wrong credentials',
+                );
+              } else if (e.code == 'invalid-credential') {
+                await showErrordialog(
+                  context,
+                  'Wrong credentials',
+                );
+              } else {
+                await showErrordialog(
+                  context,
+                  'Error: ${e.code}',
+                );
               }
+            } catch (e) {
+              await showErrordialog(
+                context,
+                e.toString(),
+              );
             }
           },
           child: Text('Log in'),
@@ -73,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
         TextButton(
           onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-              '/register',
+              registerRoute,
               (route) => false,
             );
           },

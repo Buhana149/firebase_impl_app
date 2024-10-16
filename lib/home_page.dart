@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/firebase_options.dart';
 import 'package:firebase_impl_app/register_pages/login_view.dart';
 import 'package:firebase_impl_app/register_pages/verify_email_view.dart';
@@ -63,7 +64,7 @@ class _NotesViewState extends State<NotesView> {
                   if (shouldLogout) {
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/login',
+                      loginRoute,
                       (_) => false,
                     );
                   }

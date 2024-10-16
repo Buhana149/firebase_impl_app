@@ -1,3 +1,4 @@
+import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/register_pages/login_view.dart';
 import 'package:firebase_impl_app/register_pages/register_view.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: {
-        '/login' : (context) => const LoginView(),
-        '/register' : (context) => const RegisterView(),
-        '/notes' : (context) => NotesView(),
+        loginRoute : (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
+        notesRoute : (context) => NotesView(),
       },
     );
   }
