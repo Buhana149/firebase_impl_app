@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_impl_app/constants/routes.dart';
+import 'package:firebase_impl_app/utilities/show_error_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -55,31 +55,54 @@ class _RegisterViewState extends State<RegisterView> {
             final email = _email.text;
             final password = _password.text;
             try {
-              final userCredential =
-                  FirebaseAuth.instance.createUserWithEmailAndPassword(
+              FirebaseAuth.instance.createUserWithEmailAndPassword(
                 email: email,
                 password: password,
               );
-              devtools.log(userCredential.toString());
+
+              final user = FirebaseAuth.instance.currentUser;
+
+              await user?.sendEmailVerification();
+
+              Navigator.of(context).pushNamed(verifyEmailRoute);
             } on FirebaseAuthException catch (e) {
               if (e.code == 'weak-password') {
-                devtools.log('Weak Password');
+                await showErrordialog(
+                  context,
+                  'Weak password',
+                );
               } else if (e.code == 'email-already-in-use') {
-                devtools.log('Email is alreadry in use');
+                await showErrordialog(
+                  context,
+                  'Email already in use',
+                );
               } else if (e.code == 'invalid-email') {
-                devtools.log('Invalid email');
+                await showErrordialog(
+                  context,
+                  'This is an invalid email address',
+                );
+              } else {
+                await showErrordialog(
+                  context,
+                  'Error: ${e.code}',
+                );
               }
+            } catch (e) {
+              await showErrordialog(
+                context,
+                e.toString(),
+              );
             }
           },
           child: Text('Register'),
         ),
         TextButton(
           onPressed: () {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-            loginRoute,
-            (route) => false,
-          );
-        },
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              loginRoute,
+              (route) => false,
+            );
+          },
           child: Text('Already registered? Login here!'),
         ),
       ]),
