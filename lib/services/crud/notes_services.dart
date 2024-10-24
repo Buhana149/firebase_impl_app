@@ -1,4 +1,4 @@
-import 'package:firebase_impl_app/services/auth/crud/crud_exeptions.dart';
+import 'package:firebase_impl_app/services/crud/crud_exeptions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
