@@ -2,6 +2,7 @@ import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/enums/menu_action.dart';
 import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/services/auth/auth_service.dart';
+import 'package:firebase_impl_app/services/crud/notes_services.dart';
 import 'package:flutter/material.dart';
 
 class NotesView extends StatefulWidget {
@@ -12,6 +13,21 @@ class NotesView extends StatefulWidget {
 }
 
 class _NotesViewState extends State<NotesView> {
+  late final NotesServices _notesServices;
+  String get userEmail => AuthService.firbase().currentUser!.email!;
+
+  @override
+  void initState() {
+    _notesServices = NotesServices();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _notesServices.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +38,12 @@ class _NotesViewState extends State<NotesView> {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(newNoteRoute);
+            },
+            icon: const Icon(Icons.add),
+          ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {
@@ -48,7 +70,26 @@ class _NotesViewState extends State<NotesView> {
           )
         ],
       ),
-      body: const Text('Hello World'),
+      body: FutureBuilder(
+          future: _notesServices.getOrCreateUser(email: userEmail),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                return StreamBuilder(
+                  stream: _notesServices.allNotes,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const Text('Waiting for all notes..');
+                      default:
+                        return const CircularProgressIndicator();
+                    }
+                  },
+                );
+              default:
+                return CircularProgressIndicator();
+            }
+          }),
     );
   }
 }

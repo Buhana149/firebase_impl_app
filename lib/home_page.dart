@@ -1,6 +1,6 @@
-import 'package:firebase_impl_app/register_pages/login_view.dart';
-import 'package:firebase_impl_app/register_pages/notes_view.dart';
-import 'package:firebase_impl_app/register_pages/verify_email_view.dart';
+import 'package:firebase_impl_app/views/login_view.dart';
+import 'package:firebase_impl_app/views/notes/notes_view.dart';
+import 'package:firebase_impl_app/views/verify_email_view.dart';
 import 'package:firebase_impl_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
