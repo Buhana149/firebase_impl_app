@@ -1,4 +1,4 @@
-import 'package:firebase_impl_app/views/notes/dialogs/generic_dialog.dart';
+import 'package:firebase_impl_app/utilities/dialogs/generic_dialog.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showErrorDialog(

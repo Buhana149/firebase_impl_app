@@ -1,7 +1,7 @@
 import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/views/login_view.dart';
-import 'package:firebase_impl_app/views/notes/new_notes.dart';
+import 'package:firebase_impl_app/views/notes/create_update_note_view.dart';
 import 'package:firebase_impl_app/views/notes/notes_view.dart';
 import 'package:firebase_impl_app/views/register_view.dart';
 import 'package:firebase_impl_app/views/verify_email_view.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NotesView(),
         verifyEmailRoute: (context) => const VerifyEmailView(),
-        newNoteRoute: (context) => const NewNoteView(),
+        createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
       },
     );
   }
