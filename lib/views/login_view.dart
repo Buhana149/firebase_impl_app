@@ -1,7 +1,7 @@
 import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/services/auth/auth_exceptions.dart';
 import 'package:firebase_impl_app/services/auth/auth_service.dart';
-import 'package:firebase_impl_app/utilities/show_error_dialog.dart';
+import 'package:firebase_impl_app/views/notes/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -74,21 +74,21 @@ class _LoginViewState extends State<LoginView> {
                 );
               }
             } on UserNotFountAuthException {
-              await showErrordialog(
+              await showErrorDialog(
                 context,
                 'User not found',
               );
             } on WrongPasswordAuthException {
-              await showErrordialog(
+              await showErrorDialog(
                 context,
                 'Wrong credentials',
               );
             } on GenericAuthException {
-              await showErrordialog(
+              await showErrorDialog(
                 context,
                 'Authentication error',
               );
-            } 
+            }
           },
           child: Text('Log in'),
         ),

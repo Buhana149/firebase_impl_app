@@ -3,6 +3,8 @@ import 'package:firebase_impl_app/enums/menu_action.dart';
 import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/services/auth/auth_service.dart';
 import 'package:firebase_impl_app/services/crud/notes_services.dart';
+import 'package:firebase_impl_app/views/notes/logout_dialog.dart';
+import 'package:firebase_impl_app/views/notes/notes_list_view.dart';
 import 'package:flutter/material.dart';
 
 class NotesView extends StatefulWidget {
@@ -77,18 +79,10 @@ class _NotesViewState extends State<NotesView> {
                       case ConnectionState.active:
                         if (snapshot.hasData) {
                           final allNotes = snapshot.data as List<DatabaseNote>;
-                          return ListView.builder(
-                            itemCount: allNotes.length,
-                            itemBuilder: (context, index) {
-                              final note = allNotes[index];
-                              return ListTile(
-                                title: Text(
-                                  note.text,
-                                  maxLines: 1,
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              );
+                          return NotesListView(
+                            notes: allNotes,
+                            onDeleteNote: (note) async {
+                              await _notesServices.deleteNote(id: note.id);
                             },
                           );
                         } else {
