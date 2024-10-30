@@ -1,6 +1,5 @@
 import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/enums/menu_action.dart';
-import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/services/auth/auth_service.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_bloc.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_events.dart';
