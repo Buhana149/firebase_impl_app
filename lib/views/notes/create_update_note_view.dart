@@ -53,7 +53,6 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       return existingNote;
     }
     final currentUser = AuthService.firbase().currentUser!;
-    final email = currentUser.email;
     final userId = currentUser.id;
     final newNote = await _notesServices.createNewNote(ownerUserId: userId);
     _note = newNote;
