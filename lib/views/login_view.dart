@@ -2,6 +2,7 @@ import 'package:firebase_impl_app/constants/routes.dart';
 import 'package:firebase_impl_app/services/auth/auth_exceptions.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_bloc.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_events.dart';
+import 'package:firebase_impl_app/services/auth/bloc/auth_state.dart';
 import 'package:firebase_impl_app/utilities/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,35 +54,30 @@ class _LoginViewState extends State<LoginView> {
           autocorrect: false,
           decoration: InputDecoration(hintText: 'Enter your password here'),
         ),
-        TextButton(
-          onPressed: () async {
-            final email = _email.text;
-            final password = _password.text;
-            try {
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) async {
+            if (state is AuthStateLoggedOut) {
+              if (state.exception is UserNotFountAuthException ||
+                  state.exception is WrongPasswordAuthException) {
+                await showErrorDialog(context, 'Wrong credentials');
+              } else if (state.exception is GenericAuthException) {
+                await showErrorDialog(context, 'Authentication error');
+              }
+            }
+          },
+          child: TextButton(
+            onPressed: () async {
+              final email = _email.text;
+              final password = _password.text;
               context.read<AuthBloc>().add(
                     AuthEventsLogIn(
                       email,
                       password,
                     ),
                   );
-            } on UserNotFountAuthException {
-              await showErrorDialog(
-                context,
-                'User not found',
-              );
-            } on WrongPasswordAuthException {
-              await showErrorDialog(
-                context,
-                'Wrong credentials',
-              );
-            } on GenericAuthException {
-              await showErrorDialog(
-                context,
-                'Authentication error',
-              );
-            }
-          },
-          child: Text('Log in'),
+            },
+            child: Text('Log in'),
+          ),
         ),
         TextButton(
           onPressed: () {
