@@ -1,7 +1,6 @@
 import 'package:firebase_impl_app/services/auth/auth_user.dart';
 
 abstract class AuthProvider {
-   
   Future<void> initialize();
 
   AuthUser? get currentUser;
@@ -16,4 +15,5 @@ abstract class AuthProvider {
   });
   Future<void> logOut();
   Future<void> sendEmailVerification();
+  Future<void> sendPasswordReset({required String toEmail});
 }
