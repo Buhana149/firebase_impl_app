@@ -3,7 +3,6 @@ import 'package:firebase_impl_app/services/auth/bloc/auth_bloc.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_events.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_state.dart';
 import 'package:firebase_impl_app/utilities/dialogs/error_dialog.dart';
-import 'package:firebase_impl_app/utilities/dialogs/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

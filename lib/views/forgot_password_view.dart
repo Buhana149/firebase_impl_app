@@ -4,7 +4,6 @@ import 'package:firebase_impl_app/services/auth/bloc/auth_state.dart';
 import 'package:firebase_impl_app/utilities/dialogs/error_dialog.dart';
 import 'package:firebase_impl_app/utilities/dialogs/password_reset_email_sent_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordView extends StatefulWidget {
