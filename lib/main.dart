@@ -1,5 +1,8 @@
 import 'package:firebase_impl_app/home_page.dart';
+import 'package:firebase_impl_app/services/auth/bloc/auth_bloc.dart';
+import 'package:firebase_impl_app/services/auth/firebase_auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(FirebaseAuthProvider()),
+        child: const HomePage(),
+      ),
     );
   }
 }
