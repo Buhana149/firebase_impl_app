@@ -1,11 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_impl_app/home_page.dart';
 import 'package:firebase_impl_app/services/auth/bloc/auth_bloc.dart';
 import 'package:firebase_impl_app/services/auth/firebase_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 
